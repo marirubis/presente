@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>História do Nosso Amor ❤️</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Playfair Display', serif;
+            background: hsl(0, 97%, 58%);
+        }
+
+        /* TELAS */
+        .tela {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+            transition: opacity 1s ease;
+
+            opacity: 0;
+            z-index: 0;
+            pointer-events: none;
+
+            color: black;
+            padding: 20px;
+        }
+
+        /* tela ativa */
+        .ativa {
+            opacity: 1;
+            z-index: 10;
+            pointer-events: all;
+        }
+
+        /* TÍTULOS */
+        h1 {
+            font-size: 34px;
+        }
+
+        h2 {
+            font-size: 26px;
+        }
+
+        /* TEXTO */
+        p {
+            font-size: 19px;
+            max-width: 600px;
+            line-height: 1.6;
+            margin-top: 10px;
+        }
+
+        /* BOTÃO */
+        button {
+            margin-top: 25px;
+            padding: 12px 30px;
+            font-size: 17px;
+            border: none;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            font-family: 'Playfair Display', serif;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.08);
+        }
+
+        /* LOADING */
+        .loading {
+            margin-top: 15px;
+            opacity: 0;
+        }
+
+        /* FOTOS */
+        .fotos {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* IMAGEM AJUSTADA */
+        .fotos img {
+            width: 220px;
+            /* tamanho mais equilibrado */
+            max-width: 75vw;
+            border-radius: 14px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+            transition: 0.3s;
+        }
+
+        .fotos img:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- INÍCIO -->
+    <div class="tela ativa" id="inicio">
+        <h1>Nosso amor tem uma história ❤︎</h1>
+        <button onclick="comecar()">Começar</button>
+        <div class="loading" id="loading">iniciando...</div>
+    </div>
+
+    <!-- CAPÍTULO 1 -->
+    <div class="tela" id="capitulo1">
+        <h2>Capítulo 1: Primeira conversa</h2>
+        <p>
+            Tudo começou no dia 24/03/2023, quando começamos a conversar.
+            E como bons emocionados que somos, pouco tempo depois começamos a nos chamar de “amor” e ter encontros na
+            igreja,
+            onde ocorreu nosso primeiro selinho.
+        </p>
+
+        <div class="fotos">
+            <img src="1encontro.jpg">
+        </div>
+
+        <button onclick="trocar('capitulo2')">Próximo</button>
+    </div>
+
+    <!-- CAPÍTULO 2 -->
+    <div class="tela" id="capitulo2">
+        <h2>Capítulo 2: Pedido de namoro</h2>
+        <p>
+            Com 1 mês e 4 dias de conversa, você foi à minha casa pedir permissão ao meu pai para podermos namorar.
+            E foi quando oficializamos nosso relacionamento, no dia 28/04/2023.
+        </p>
+
+        <div class="fotos">
+            <img src="foto14.jpg">
+        </div>
+
+        <button onclick="trocar('capitulo3')">Próximo</button>
+    </div>
+
+    <!-- CAPÍTULO 3 -->
+    <div class="tela" id="capitulo3">
+        <h2>Capítulo 3: Primeiro mês de namoro</h2>
+        <p>
+            Ficamos muito ansiosos para completar nosso 1° mês de namoro.
+            Esse foi o primeiro presente de namoro oficial que você me deu ♡
+        </p>
+
+        <div class="fotos">
+            <img src="1mesdenamoro.jpg">
+        </div>
+
+        <button onclick="trocar('capitulo4')">Próximo</button>
+    </div>
+
+    <script>
+        function comecar() {
+            const loading = document.getElementById("loading");
+            loading.style.opacity = 1;
+
+            setTimeout(() => {
+                trocar("capitulo1");
+            }, 1500);
+        }
+
+        function trocar(idProximo) {
+            const atual = document.querySelector(".tela.ativa");
+            const proxima = document.getElementById(idProximo);
+
+            if (atual) atual.classList.remove("ativa");
+            if (proxima) proxima.classList.add("ativa");
+        }
+    </script>
+
+</body>
+
+</html>
