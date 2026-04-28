@@ -2,189 +2,340 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>História do Nosso Amor ❤️</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>História do Nosso Amor ❤️</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            font-family: 'Playfair Display', serif;
-            background: hsl(0, 97%, 58%);
-        }
+<style>
+body {
+    margin: 0;
+    overflow: auto;
+    font-family: 'Playfair Display', serif;
+    background: linear-gradient(135deg, #f45f5f, #ff9a9e);
+}
 
-        /* TELAS */
-        .tela {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
+.tela {
+    position: absolute;
+    width: calc(100% - 30px);
+    min-height: calc(100% - 30px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: opacity 1s ease, transform 1s ease;
+    opacity: 0;
+    transform: scale(0.95);
+    z-index: 0;
+    pointer-events: none;
+    padding: 15px;
+    border: 4px solid rgb(170, 0, 102);
+    border-radius: 20px;
+    margin: 15px;
+    background: rgba(255, 0, 0,0.15);
+}
 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+.ativa {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 10;
+    pointer-events: all;
+}
 
-            text-align: center;
-            transition: opacity 1s ease;
+.final {
+    background: linear-gradient(135deg, #1a0000, #330000);
+    color: white;
+}
 
-            opacity: 0;
-            z-index: 0;
-            pointer-events: none;
+button {
+    padding: 12px 26px;
+    border-radius: 10px;
+    cursor: pointer;
+}
 
-            color: black;
-            padding: 20px;
-        }
+.btn-proximo {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: white;
+}
 
-        /* tela ativa */
-        .ativa {
-            opacity: 1;
-            z-index: 10;
-            pointer-events: all;
-        }
+.btn-voltar {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(255,255,255,0.7);
+}
 
-        /* TÍTULOS */
-        h1 {
-            font-size: 34px;
-        }
+.btn-comecar {
+    background: white;
+    font-size: 20px;
+    padding: 15px 40px;
+    animation: pulsar 1.5s infinite;
+}
 
-        h2 {
-            font-size: 26px;
-        }
+@keyframes pulsar {
+    50% { transform: scale(1.15); }
+}
 
-        /* TEXTO */
-        p {
-            font-size: 19px;
-            max-width: 600px;
-            line-height: 1.6;
-            margin-top: 10px;
-        }
+.loading {
+    display: none;
+    margin-top: 10px;
+}
 
-        /* BOTÃO */
-        button {
-            margin-top: 25px;
-            padding: 12px 30px;
-            font-size: 17px;
-            border: none;
-            border-radius: 10px;
-            background: white;
-            cursor: pointer;
-            font-family: 'Playfair Display', serif;
-            transition: 0.3s;
-        }
+.fotos img {
+    width: 80%;
+    max-width: 250px;
+    border-radius: 14px;
+}
 
-        button:hover {
-            transform: scale(1.08);
-        }
+/* BOTÃO NÃO FUGINDO */
+#btnNao {
+    position: relative;
+}
 
-        /* LOADING */
-        .loading {
-            margin-top: 15px;
-            opacity: 0;
-        }
+/* CORAÇÕES */
+.coracao {
+    position: fixed;
+    font-size: 20px;
+    animation: explodir 1s ease forwards;
+}
 
-        /* FOTOS */
-        .fotos {
-            margin-top: 25px;
-            display: flex;
-            justify-content: center;
-        }
-
-        /* IMAGEM AJUSTADA */
-        .fotos img {
-            width: 220px;
-            /* tamanho mais equilibrado */
-            max-width: 75vw;
-            border-radius: 14px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
-            transition: 0.3s;
-        }
-
-        .fotos img:hover {
-            transform: scale(1.05);
-        }
-    </style>
+@keyframes explodir {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: translateY(-200px) scale(2); opacity: 0; }
+}
+</style>
 </head>
 
 <body>
 
-    <!-- INÍCIO -->
-    <div class="tela ativa" id="inicio">
-        <h1>Nosso amor tem uma história ❤︎</h1>
-        <button onclick="comecar()">Começar</button>
-        <div class="loading" id="loading">iniciando...</div>
+<!-- INICIO -->
+<div class="tela ativa" id="inicio">
+    <h1>Nossa história ❤️</h1>
+    <button class="btn-comecar" onclick="comecar()">❤️ Começar ❤️</button>
+    <div class="loading" id="loading">iniciando...</div>
+</div>
+
+<!-- EXPLICAÇÃO -->
+<div class="tela" id="explicacao">
+    <h2>Explicação</h2>
+    <p>
+        Oii amor!!
+        A intenção desse site foi trazer lembranças do nosso começo, por mais que temos apenas 3 anos juntos rsrsrs
+        Espero que você goste, valorize hein? deu trabalho, mas faço tudo por você, eu te amo!!
+        
+        Feliz 3 anosꨄ︎
+    </p>
+    <button class="btn-voltar" onclick="trocar('inicio')">Voltar</button>
+    <button class="btn-proximo" onclick="trocar('capitulo1')">Próximo</button>
+</div>
+
+<!-- CAPÍTULOS (NÃO ALTERADOS) -->
+
+<div class="tela" id="capitulo1">
+    <h2>Capítulo 1: Primeira conversa</h2>
+    <p>
+        Tudo começou no dia 24/03/2023, quando começamos a conversar.
+        E como bons emocionados que somos, pouco tempo depois começamos a nos chamar de “amor”
+        e ter encontros na igreja, onde aconteceu nosso primeiro selinho.
+    </p>
+    <div class="fotos"><img src="1encontro.jpg"></div>
+    <button class="btn-voltar" onclick="trocar('explicacao')">Voltar</button>
+    <button class="btn-proximo" onclick="trocar('capitulo2')">Próximo</button>
+</div>
+
+<div class="tela" id="capitulo2">
+    <h2>Capítulo 2: Pedido de namoro</h2>
+    <p>
+        Com 1 mês e 4 dias de conversa, você foi à minha casa pedir permissão ao meu pai para podermos namorar.
+        E foi quando oficializamos nosso relacionamento, no dia 28/04/2023.
+    </p>
+    <div class="fotos"><img src="foto14.jpg"></div>
+    <button class="btn-voltar" onclick="trocar('capitulo1')">Voltar</button>
+    <button class="btn-proximo" onclick="trocar('capitulo3')">Próximo</button>
+</div>
+
+<div class="tela" id="capitulo3">
+    <h2>Capítulo 3</h2>
+    <p>Ficamos muito ansioso para completar nosso 1° mês de namoro
+Esse foi o primeiro presente de namoro oficial que você me deu ⁠♡</p>
+    <div class="fotos"><img src="1mesdenamoro.jpg"></div>
+    <button class="btn-voltar" onclick="trocar('capitulo2')">Voltar</button>
+    <button class="btn-proximo" onclick="trocar('capitulo4')">Próximo</button>
+</div>
+
+<div class="tela" id="capitulo4">
+    <h2>Capítulo 4</h2>
+    <p>No nosso primeiro Dia Dos Namorados, você me deu uma pelúcia de coração e uma caixa cheia de chocolates e de amor!!</p>
+    <div class="fotos"><img src="1diadosnamorados.jpg"></div>
+    <button class="btn-voltar" onclick="trocar('capitulo3')">Voltar</button>
+    <button class="btn-proximo" onclick="trocar('capitulo5')">Próximo</button>
+</div>
+
+<div class="tela" id="capitulo5">
+    <h2>Capítulo 5</h2>
+    <p>Nesse dia da foto, você sofreu um acidente na educação física, 
+        bateu a cabeça muito forte e acabou desmaiando... quase me matou do coração🤡
+        obs: vc ainda quebrou o braço e rasgou a beiça... seu anjo da guarda não pode tirar 
+    o olho de vc ne??</p>
+    <div class="fotos"><img src="foto15.jpg"></div>
+    <button class="btn-voltar" onclick="trocar('capitulo4')">Voltar</button>
+    <button class="btn-proximo" onclick="trocar('capitulo6')">Próximo</button>
+</div>
+
+<div class="tela" id="capitulo6">
+    <h2>Capítulo 6</h2>
+    <p>Nós começamos a usar nossa primeria aliança no dia 25/12/2023,  
+        esse dia foi tão especial para mim ꨄ︎ Também foi o nosso primeiro Natal juntosꨄ︎</p>
+    <div class="fotos"><img src="1alianca.jpg"></div>
+    <button class="btn-voltar" onclick="trocar('capitulo5')">Voltar</button>
+    <button class="btn-proximo" onclick="trocar('capitulo7')">Próximo</button>
+</div>
+
+<div class="tela" id="capitulo7">
+    <h2>Capítulo 7</h2>
+    <p>Nosso primeiro reveillon juntosꨄ︎ </p>
+    <div class="fotos"><img src="1reveillon.jpg"></div>
+    <button class="btn-voltar" onclick="trocar('capitulo6')">Voltar</button>
+    <button class="btn-proximo" onclick="trocar('capitulo8')">Próximo</button>
+</div>
+
+<div class="tela" id="capitulo8">
+    <h2>Capítulo 8</h2>
+    <p>Infelizmente, em 2024 minha mãe faleceu... mas eu sei que você esteve e sempre estará do meu lado,
+        e eu sou extremamente grata por ter você comigoꨄ︎ </p>
+    <div class="fotos"><img src="dificil.jpg"></div>
+    <button class="btn-voltar" onclick="trocar('capitulo7')">Voltar</button>
+    <button class="btn-proximo" onclick="trocar('capitulo9')">Próximo</button>
+</div>
+
+<div class="tela" id="capitulo9">
+    <h2>Capítulo 9</h2>
+    <p> e como eu sempre soube... nós dividimos os mesmos neurônios KKKKKK </p>
+    <div class="fotos"><img src="zoacao2.jpg"></div>
+    <button class="btn-voltar" onclick="trocar('capitulo8')">Voltar</button>
+    <button class="btn-proximo" onclick="trocar('capitulo10')">Próximo</button>
+</div>
+
+<div class="tela" id="capitulo10">
+    <h2>Capítulo 10</h2>
+    <p> amo cuidar de você!!! KKKKKKKKKKKKKKKKKKKK</p>
+    <div class="fotos"><img src="zoacao.jpg"></div>
+    <button class="btn-voltar" onclick="trocar('capitulo9')">Voltar</button>
+    <button class="btn-proximo" onclick="trocar('capitulo11')">Próximo</button>
+</div>
+
+<div class="tela" id="capitulo11">
+    <h2>Capítulo 11</h2>
+    <p> ꨄ︎2 anos de namoroꨄ︎ </p>
+    <div class="fotos"><img src="2anos.jpg"></div>
+    <button class="btn-voltar" onclick="trocar('capitulo10')">Voltar</button>
+    <button class="btn-proximo" onclick="trocar('final')">Final ❤️</button>
+</div>
+
+<!-- FINAL -->
+<div class="tela final" id="final">
+    <h2>Fim…??❤️</h2>
+    <p>
+        Acabamos de começar nossa história, ainda temos muitos capítulos para contruir!!
+        que Deus abençoe nosso relacionamento e nossas vidas.
+        que nunca nos falte amor... eu te amo!!ꨄ︎ꨄ︎ꨄ︎
+        E mesmo depois de brigas e discussões... eu ainda escolheria você. Todos os dias ❤️
+    </p>
+    <button class="btn-voltar" onclick="trocar('capitulo11')">Voltar</button>
+    <button class="btn-proximo" onclick="trocar('paginaAmor')">Clique aqui ❤️</button>
+</div>
+
+<!-- NOVA PÁGINA -->
+<div class="tela" id="paginaAmor">
+
+    <h2 id="frase-topo">Você é meu lugar favorito ❤️</h2>
+
+    <button onclick="trocarFrase()" style="margin-top:10px;">
+    Clique aqui 💖
+    </button>
+
+    <h1>Você me ama?</h1>
+
+    <div style="margin-top:20px;">
+        <button onclick="respostaSim()">SIM</button>
+        <button id="btnNao" onmouseover="fugir()">NÃO</button>
     </div>
 
-    <!-- CAPÍTULO 1 -->
-    <div class="tela" id="capitulo1">
-        <h2>Capítulo 1: Primeira conversa</h2>
-        <p>
-            Tudo começou no dia 24/03/2023, quando começamos a conversar.
-            E como bons emocionados que somos, pouco tempo depois começamos a nos chamar de “amor” e ter encontros na
-            igreja,
-            onde ocorreu nosso primeiro selinho.
-        </p>
+    <p id="resposta" style="margin-top:20px;"></p>
 
-        <div class="fotos">
-            <img src="1encontro.jpg">
-        </div>
+    <button class="btn-voltar" onclick="trocar('final')">Voltar</button>
 
-        <button onclick="trocar('capitulo2')">Próximo</button>
-    </div>
+</div>
 
-    <!-- CAPÍTULO 2 -->
-    <div class="tela" id="capitulo2">
-        <h2>Capítulo 2: Pedido de namoro</h2>
-        <p>
-            Com 1 mês e 4 dias de conversa, você foi à minha casa pedir permissão ao meu pai para podermos namorar.
-            E foi quando oficializamos nosso relacionamento, no dia 28/04/2023.
-        </p>
+<script>
 
-        <div class="fotos">
-            <img src="foto14.jpg">
-        </div>
+function comecar() {
+    document.getElementById("loading").style.display = "block";
+    setTimeout(() => trocar("explicacao"), 1200);
+}
 
-        <button onclick="trocar('capitulo3')">Próximo</button>
-    </div>
+function trocar(id) {
+    document.querySelector(".ativa").classList.remove("ativa");
+    document.getElementById(id).classList.add("ativa");
 
-    <!-- CAPÍTULO 3 -->
-    <div class="tela" id="capitulo3">
-        <h2>Capítulo 3: Primeiro mês de namoro</h2>
-        <p>
-            Ficamos muito ansiosos para completar nosso 1° mês de namoro.
-            Esse foi o primeiro presente de namoro oficial que você me deu ♡
-        </p>
+    if (id === "paginaAmor") {
+        trocarFrase();
+    }
+}
 
-        <div class="fotos">
-            <img src="1mesdenamoro.jpg">
-        </div>
+/* FRASES */
+const frases = [
+    "É você. Sempre foi. ❤️",
+    "Nem sempre foi fácil… mas sempre foi com você.💖",
+    "A gente é meio doido… mas combina. ✨",
+    "Isso aqui é só o começo. 🌹",
+    "A gente começou rápido… mas deu certo do nosso jeito ❤️"
+];
 
-        <button onclick="trocar('capitulo4')">Próximo</button>
-    </div>
+let i = 0;
 
-    <script>
-        function comecar() {
-            const loading = document.getElementById("loading");
-            loading.style.opacity = 1;
+function trocarFrase() {
+    i++;
+    if (i >= frases.length) i = 0;
+    document.getElementById("frase-topo").innerText = frases[i];
+}
 
-            setTimeout(() => {
-                trocar("capitulo1");
-            }, 1500);
-        }
+/* RESPOSTA SIM + EXPLOSÃO */
+function respostaSim() {
+    document.getElementById("resposta").innerText = "eu sabia que você me ama 💖";
+    explodirCoracoes();
+}
 
-        function trocar(idProximo) {
-            const atual = document.querySelector(".tela.ativa");
-            const proxima = document.getElementById(idProximo);
+function explodirCoracoes() {
+    for (let i = 0; i < 25; i++) {
+        const c = document.createElement("div");
+        c.className = "coracao";
+        c.innerHTML = "❤️";
 
-            if (atual) atual.classList.remove("ativa");
-            if (proxima) proxima.classList.add("ativa");
-        }
-    </script>
+        c.style.left = Math.random() * 100 + "vw";
+        c.style.top = "50%";
+
+        document.body.appendChild(c);
+
+        setTimeout(() => c.remove(), 1000);
+    }
+}
+
+/* BOTÃO NÃO FUGINDO */
+function fugir() {
+    const btn = document.getElementById("btnNao");
+
+    const x = Math.random() * 300 - 150;
+    const y = Math.random() * 300 - 150;
+
+    btn.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+</script>
 
 </body>
-
 </html>
